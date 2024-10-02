@@ -1,0 +1,28 @@
+from flask import Flask
+import random
+
+app = Flask(__name__)
+
+
+facts_list = [
+    "Honey never spoils: Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still perfectly edible.",
+    "Octopuses have three hearts: Two pump blood through the gills, while the third pumps it to the rest of the body. When an octopus swims, the heart that delivers blood to the body stops, which is why they prefer crawling."
+]
+
+
+@app.route("/")
+def index():
+    return '<a href="/random_fact">Some fun facts</a> , <a href="/new_fact">Another message</a>'
+
+
+@app.route("/random_fact")
+def random_fact():
+    return f'<p>{random.choice(facts_list)}</p>'
+
+
+@app.route("/new_fact")
+def display_new_fact():
+    return '<p>A day on Venus is longer than a year on Venus: Venus takes about 243 Earth days to rotate once on its axis, but it only takes about 225 Earth days to complete one orbit around the Sun. This means a single day on Venus (one rotation) is longer than a year on Venus (one orbit).</p>'
+
+if __name__ == "__main__":
+    app.run(debug=True)
